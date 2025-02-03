@@ -26,20 +26,7 @@ const imagesArray = [
 
 let ramdomNum = Math.round(Math.random()*3)
 
-const users = {
-    "alakaka":{
-        name:"Suraj",
-        avatar:"akakak"
-    },
-    "kwadkajd":{
-        name:"aman",
-        avatar:"akakak"
-    },
-    "akjas":{
-        name:"vivek",
-        avatar:"akakak"
-    }
-}
+const users = {}
 
 io.on('connection', (socket)=>{
     console.log("Connection made: ", socket.id);
