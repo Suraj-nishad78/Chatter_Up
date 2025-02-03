@@ -1,0 +1,244 @@
+
+body{
+    background-color: cadetblue;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#container{
+    display:  flex;
+    margin:3em 7em;
+    /* display: none; */
+}
+#message-panel{
+    background-color: white;
+    width: 70%;
+}
+#chat-box{
+    border: 1px solid wheat;
+}
+.hidden {
+    display: none;
+}
+
+/*--------- Name-Conatainer ------------*/
+#name-container{
+    margin: 13em auto;
+    /* display: none; */
+}
+#home-content{
+    text-align: center;
+    margin-top: 100px;
+}
+#home-content h1{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: honeydew;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    font-size: 1.7em;
+}
+#home-content h1 u b{
+    font-size: 1em;
+    color: greenyellow;
+}
+#home-content img{
+    margin-top: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+#form-data{
+    display: flex;
+    /* margin-top:-50px; */
+    justify-content: center;
+    align-items: center;
+}
+#form-data form{
+    width: 100%;
+    height: 100px;
+    /* border: 1px solid black; */
+    text-align: center;
+}
+#form-data input{
+    margin-top: 10px;
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    padding-left: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    outline: none;
+    border: none;
+    background-color: rgb(161, 214, 216);
+    color: black;
+    font-weight: bold;
+    border-bottom: 10x solid rgb(158, 22, 22);
+}
+#form-data button{
+    margin-top: 10px;
+}
+#form-data button{
+    /* display: inline-block; */
+    margin:10px 10px ;
+    font-size: 1.1em;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 5px 10px;
+    font-weight: 700;
+    background-color: chartreuse;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#form-data button:hover{
+    color: white;
+    background-color: rgb(62, 62, 216);
+    transition: all .5s ease-in-out;
+}
+/*---------Notification ------------*/
+#notification-title{
+    display: flex;
+    margin: 0px 10px 0px;
+    padding: 10px;
+    border: 1px solid wheat;
+}
+#notification-title .notification{
+    margin-right: 10px;
+}
+#notification-title .notification i{
+    /* color: lawngreen; */
+    color: limegreen;
+    font-size: .9em;
+    margin-right: 5px;
+}
+#notification-title .notification span {
+    color: limegreen;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+#notification-title .user-typing {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/*--------- Message Box ------------*/
+#message-box{
+    padding: 10px 0px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    margin: 0px 10px 0px ;
+    height: 30em;
+    position: relative;
+    background-color: rgba(128, 128, 128, .2);
+}
+.msg-container{
+    display: flex;
+    margin-bottom: 15px;
+}
+.user-image{
+    margin: 0px 10px;
+}
+.user-image img{
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    position: relative;
+    top: 2.2em;
+}
+.user-message{
+    /* border: 1px solid gray; */
+    padding: 7px;
+    width: max-content;
+    border-radius: 5px 5px 5px 0px;
+    background-color: white;
+}
+.user-name-time{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.user-name-time p{
+    font-size: 1.3em;
+    font-weight: bold;
+}
+.user-name-time span{
+    font-size: 1em;
+    font-weight: bold;
+}
+.message{
+    font-size: 1.2em;
+}
+.sender{
+    float: right;
+    color:  white;
+}
+.sender .user-message{
+    background-color: rgb(74, 169, 206);
+    border-radius: 5px 5px 0px 5px;
+}
+/*--------- Input Box ------------*/
+#input-box{
+    margin: 0px 10px 10px;
+
+}
+#input-box input{
+    width: 92%;
+    height: 2em;
+    padding-left:10px;
+    /* padding-right: 10px; */
+    font-size: 1.2em;
+}
+#input-box input:focus{
+    border: 1px solid lime;
+}
+#input-box button{
+    padding: 8px 10px;
+    font-size: 1.2em;
+    background-color:lime;
+    /* position: relative;
+    left: -5px; */
+}
+/*--------- Connected Users ------------*/
+#users {
+    height: max-content;
+    margin: 10px 30px;
+}
+#users .total-users{
+    border: 1px solid rgba(0, 0, 0, .1);
+    width: 15em;
+    text-align: center;
+    padding: 8px 0px;
+    border-radius: 5px;
+    background-color: rgb(74, 169, 206);
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.user-name {
+    border: 1px solid rgba(0, 0, 0, .1);
+    min-width: 18em;
+    text-align: center;
+    padding: 10px 0px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: rgb(146, 202, 224);
+}
+ .user-name i{
+    color: lime;
+    margin-right: 10px;
+    font-size: .7em;
+}
+.user-name span{
+    font-size: 1.2em;
+}
+
+
+
+
+
+
+
+
+
+
+
