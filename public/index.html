@@ -34,139 +34,24 @@
                     </div> -->
                 </div>
                 <div id="message-box">
-                    <!-- Message box-1 -->
-                    <div class="msg-container">
-                        <div class="user-image">
-                            <img src="https://img.freepik.com/premium-vector/cute-chibi-superhero-design_1046319-149433.jpg">
-                        </div>
-                        <div class="user-message">
-                            <div class="user-name-time">
-                                <p>coding ninjas</p>
-                                <span>02:01</span>
-                            </div>
-                            <div class="message">
-                                Hello learners! let's walk today.
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Message box-1 -->
-                    <div class="msg-container sender">
-                        <div class="user-message">
-                            <div class="user-name-time">
-                                <p>coding ninjas</p>
-                                <span>02:01</span>
-                            </div>
-                            <div class="message">
-                                Hello learners! let's walk today.
-                            </div>
-                        </div>
-                        <div class="user-image">
-                            <img src="https://img.freepik.com/premium-vector/cute-chibi-superhero-design_1046319-149433.jpg">
-                        </div>
-                    </div>
                 </div>                
                 <div id="input-box">
-                    <form id="msg-sent">
+                    <form>
+                        <label for="input-text"></label>
                         <input type="text" id="input-text" placeholder="Enter your message...">
-                        <button type="submit">Send</button>
+                        <button id="msg-sent">Send</button>
                     </form>
                 </div>
             </div>
         </main>
         <main id="users">
-            <div class="total-users">connected users </div>
-                <div class="user-name">
-                    <i class="fa-solid fa-circle"></i>
-                    <span>coding ninjas</span>
-                </div>
-                <div class="user-name">
-                    <i class="fa-solid fa-circle"></i>
-                    <span>arnav</span>
-                </div>
-                <div class="user-name">
-                    <i class="fa-solid fa-circle"></i>
-                    <span>ankur</span>
-                </div>
         </main>
+        <audio id="my-audio" controls style="display: none;">
+            <source src="http://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3" type="audio/mpeg">
+        </audio>
     </header>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-    <script>
-
-       let socket = io.connect('http://localhost:3000');
-
-       const nameContainer = document.getElementById('name-container')
-       const container =  document.getElementById('container')
-       const inputName = document.getElementById('input-name')
-       const submitName = document.getElementById('submit-name')
-       const notificationTitle = document.getElementById('notification-title')
-       const usersElement = document.getElementById('users')
-
-       function hideMainContainer(){
-        container.style.display = 'none'
-       }
-
-       hideMainContainer()
-
-       submitName.addEventListener('click', (e)=>{
-        e.preventDefault();
-
-        const name = inputName.value;
-        if(name.trim() === ''){
-            return alert("Please enter your name...")
-        }
-
-        container.style.display = 'block'
-        nameContainer.style.display = 'none'
-        container.style.display = 'flex'
-
-        socket.emit('username', name)
-
-       })
-
-       socket.on('notify', (message)=>{
-        notificationTitle.innerHTML = ''
-        const div = document.createElement('div')
-        div.classList.add('notification')
-        div.innerHTML = '<i class="fa-solid fa-circle"></i>'
-
-        const span = document.createElement('span')
-        span.textContent = message.text;
-        div.append(span)
-        notificationTitle.append(div)
-
-       })
-
-    //    socket.on('allUsers', (users)=>{
-        
-    //     const names = Object.values(users).map(user => user.name);
-    //     connectedUsers(names)
-    //    })
-
-
-       function connectedUsers(users){
-        usersElement.innerHTML = ''
-
-        const totalUsers = document.createElement('div')
-        totalUsers.classList.add('total-users')
-        totalUsers.textContent = `Connected users ${users.length}`
-
-        const userNames = document.createElement('div')
-        userNames.classList.add('user-name')
-
-        users.forEach(name => {
-            const pTag = document.createElement('p')
-            const span = document.createElement('span')
-            span.innerHTML = '<i class="fa-solid fa-circle"></i>'
-            pTag.append(span)
-            pTag.textContent = name;
-            userNames.append(pTag) 
-        });
-
-        usersElement.append(totalUsers, userNames)
-
-       }
-
-    </script>
+    <script src="/script.js"></script>
 </body>
 </html>
 

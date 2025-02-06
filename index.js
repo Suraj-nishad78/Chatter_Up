@@ -1,14 +1,13 @@
 
 import express from "express";
 import mongoose from "mongoose";
-import bodyParser from "body-parser";
 import http from "http";
 import { Server } from 'socket.io';
 import dotenv from "dotenv";
 dotenv.config();
 
 import {connectToDb} from "./database/mongodb.js"
-import {MessageModel} from "./message.schema.js"
+import {MessageModel} from "./database/message.schema.js"
 
 const app = express();
 app.use(express.static('public'))
@@ -17,34 +16,56 @@ const server = http.createServer(app)
 
 const io = new Server(server)
 
-const imagesArray = [
-    "https://img.freepik.com/premium-vector/cute-chibi-superhero-design_1046319-149433.jpg",
-    "https://www.shutterstock.com/image-vector/kharkov-ukraine-august-16-2017-600nw-697034857.jpg",
-    "https://www.shutterstock.com/image-vector/july-3-2023-vector-illustration-260nw-2326749515.jpg",
-    "https://static.vecteezy.com/system/resources/previews/022/026/298/non_2x/cute-captain-america-marvel-free-vector.jpg"
-]
-
-let ramdomNum = Math.round(Math.random()*3)
-
 const users = {}
 
 io.on('connection', (socket)=>{
     console.log("Connection made: ", socket.id);
-    socket.on('username', (name)=>{
+    socket.on('username', async (data)=>{
 
-        users[socket.id] = {name, avatar: imagesArray[ramdomNum]};
-        console.log(`${users[socket.id].name} Connected successfully.`);
+        try{
+            users[socket.id] = {name: data.name, avatar: data.avatar};
+            console.log(`${users[socket.id].name} Connected successfully.`);
+    
+            socket.emit('notify', {text:`Welcome, ${users[socket.id].name}`})
+            socket.broadcast.emit('notify',{text: `${users[socket.id].name} has joined the room.`})
 
-        socket.emit('notify', {text:`Welcome, ${users[socket.id].name}`})
-        socket.broadcast.emit('notify',{text: `${users[socket.id].name} has joined the room.`})
+            const allMsg = await MessageModel.find().lean();
+    
+            io.emit("previousMessages", allMsg)
+            io.emit('allUsers', users)
+        }catch(err){
+            console.log("Error while getting old msgs: ", err);
+        }
 
-        // io.emit('allUsers', users)
-        socket.emit('allUsers', users)
+    })
 
+    socket.on('message', async (message)=>{
+        // users[socket.id].text = message;
+        try{
+            const newMsg =  await MessageModel.create({
+                username:users[socket.id].name,
+                text:message,
+                avatar:users[socket.id].avatar
+                })
+            io.emit('messageToAll', newMsg.toJSON())
+        } catch(err){
+            console.log("Error while sending msg: ", err);
+        }
+    })
+
+    socket.on('startTyping', ()=>{
+        socket.broadcast.emit('startedTyping', users[socket.id].name)
+    })
+
+    socket.on('stopTyping', ()=>{
+        socket.broadcast.emit('stoppedTyping')
     })
 
     socket.on("disconnect", ()=>{
         console.log("Conncetion disconnected.");
+        socket.broadcast.emit("leftuser", users[socket.id])
+        delete users[socket.id];
+        io.emit('allUsers', users)
     })
 })
 
