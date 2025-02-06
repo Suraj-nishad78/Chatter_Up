@@ -15,28 +15,12 @@ const myAudio = document.getElementById('my-audio')
 
 let username;
 
-inputText.addEventListener('keyup', ()=>{
- socket.emit('startTyping')
-})
-
-inputText.addEventListener('blur', ()=>{
- socket.emit('stopTyping')
-})
-
-socket.on('startedTyping', (name)=>{
- notificationTitle.innerHTML = ''
- const div = document.createElement('div')
- div.classList.add('notification')
-
- const span = document.createElement('span')
- span.textContent = `${name} is typing...`;
- div.append(span)
- notificationTitle.append(div)
-})
-
-socket.on('stoppedTyping', ()=>{
-    notifyTitle()
-})
+// Hide chat box
+function hideMainContainer(){
+    container.style.display = 'none'
+   }
+   
+hideMainContainer()
 
 // Message sent code
 sentMsg.addEventListener('click', (e)=>{
@@ -120,12 +104,6 @@ socket.on('messageToAll', (message)=>{
      return istTime;
  }
 
-// Hide chat box
-function hideMainContainer(){
- container.style.display = 'none'
-}
-
-hideMainContainer()
 
 const imagesArray = [
     "https://img.freepik.com/premium-vector/cute-chibi-superhero-design_1046319-149433.jpg",
@@ -213,6 +191,30 @@ function connectedUsers(users){
      usersElement.append(userNames)
  });
 }
+
+// Code for when user start typing to show others user is typing
+inputText.addEventListener('keyup', ()=>{
+    socket.emit('startTyping')
+   })
+   
+   inputText.addEventListener('blur', ()=>{
+    socket.emit('stopTyping')
+   })
+   
+   socket.on('startedTyping', (name)=>{
+    notificationTitle.innerHTML = ''
+    const div = document.createElement('div')
+    div.classList.add('notification')
+   
+    const span = document.createElement('span')
+    span.textContent = `${name} is typing...`;
+    div.append(span)
+    notificationTitle.append(div)
+   })
+   
+   socket.on('stoppedTyping', ()=>{
+       notifyTitle()
+   })
 
 // Left users code
 socket.on("leftuser", (message)=>{
