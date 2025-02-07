@@ -1,6 +1,6 @@
 
 
-let socket = io.connect('http://localhost:3000');
+let socket = io();
 
 const nameContainer = document.getElementById('name-container')
 const container =  document.getElementById('container')
