@@ -37,6 +37,11 @@ Chatter-Up/
 ├── package-lock.json
 └── .env
 ```
+## 🔗 Project Links
+
+- **Live Demo:** [View Hosted Project](https://chatter-up-elpc.onrender.com/)
+- **GitHub Repository:** [View Source Code](https://github.com/Suraj-nishad78/Chatter_Up)
+
 
 ## ⚙️ Installation & Setup
 
@@ -72,8 +77,6 @@ Chatter-Up/
    ```bash
    node index.js
    ```
-
-6. Open `http://localhost:5000` in your browser.
 
 ## 🚀 Deployment
 
